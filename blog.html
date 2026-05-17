@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Playlist Panda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #faf7f2;
+      --bg2:        #f2ece0;
+      --bg3:        #e8e0d0;
+      --border:     rgba(26,21,16,0.12);
+      --border2:    rgba(26,21,16,0.22);
+      --text:       #1a1510;
+      --muted:      #7a6e5e;
+      --dim:        #c8bfb0;
+      --accent:     #e07060;
+      --teal:       #3bbfb8;
+      --offwhite:   #fdfaf6;
+      --font-sans:  'Instrument Sans', sans-serif;
+      --font-mono:  'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(250,247,242,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .nav-logo img {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border2);
+    }
+    .nav-logo-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo-name .bp { color: var(--teal); }
+    .nav-logo-name .bd { color: var(--accent); }
+    .nav-back {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); }
+
+    /* HEADER */
+    .blog-header {
+      padding: 160px 40px 80px;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .blog-header-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .blog-header h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .blog-header p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* POSTS */
+    .blog-posts {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px 100px;
+    }
+
+    .post-featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--offwhite);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .post-featured:hover {
+      border-color: var(--teal);
+      box-shadow: 0 16px 48px rgba(26,21,16,0.08);
+    }
+    .post-featured-thumb {
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 72px;
+      min-height: 280px;
+    }
+    .post-featured-body {
+      padding: 40px 36px 40px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .post-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+    .post-title {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .post-excerpt {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .post-date {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--dim);
+    }
+    .post-read {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 16px;
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .post-card {
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--offwhite);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .post-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(26,21,16,0.08);
+    }
+    .post-card-thumb {
+      height: 140px;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+    .post-card-body { padding: 20px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--text);
+      color: var(--bg);
+      padding: 48px 40px 28px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(250,247,242,0.1);
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--bg);
+    }
+    .footer-logo img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+    .footer-logo-text { font-size: 15px; font-weight: 700; }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 24px auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(250,247,242,0.35);
+    }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .blog-header { padding: 120px 20px 60px; }
+      .blog-posts { padding: 0 20px 80px; }
+      .post-featured { grid-template-columns: 1fr; }
+      .post-featured-body { padding: 24px; }
+      .posts-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="panda-hero.png" alt="Playlist Panda" />
+      <span class="nav-logo-name">Playlist<span class="bp">Panda<span class="bd">.</span></span></span>
+    </a>
+    <a href="index.html" class="nav-back">← Zurück zur Hauptseite</a>
+  </nav>
+
+  <div class="blog-header">
+    <div class="blog-header-label">Musik · Kultur · Kuratierung</div>
+    <h1>Der Panda schreibt.</h1>
+    <p>Gedanken zu Musik, Playlists und allem was dazwischen passiert.</p>
+  </div>
+
+  <div class="blog-posts">
+    <!-- Featured post -->
+    <a href="#" class="post-featured reveal">
+      <div class="post-featured-thumb">🎧</div>
+      <div class="post-featured-body">
+        <div class="post-tag">✦ Featured · Playlist Tipps</div>
+        <div class="post-title">Wie ich Playlists kuratiere — mein Prozess</div>
+        <div class="post-excerpt">Von der ersten Track-Idee bis zur fertigen Playlist: So entsteht jede meiner Sammlungen. Was ich höre, wie ich auswähle, und warum manche Songs einfach nicht reinpassen.</div>
+        <div class="post-date">Mai 2025</div>
+        <span class="post-read">Weiterlesen →</span>
+      </div>
+    </a>
+
+    <!-- Post grid -->
+    <div class="posts-grid">
+      <a href="#" class="post-card reveal">
+        <div class="post-card-thumb">🎵</div>
+        <div class="post-card-body">
+          <div class="post-tag">Musik Entdecken</div>
+          <div class="post-title">5 Artists, die du noch nicht auf dem Radar hast</div>
+          <div class="post-excerpt">Underground-Picks aus Deep House, Indie-Folk und Deutschrap.</div>
+          <div class="post-date">April 2025</div>
+        </div>
+      </a>
+      <a href="#" class="post-card reveal">
+        <div class="post-card-thumb">🐼</div>
+        <div class="post-card-body">
+          <div class="post-tag">Behind the Panda</div>
+          <div class="post-title">Warum ich PlaylistPanda gestartet habe</div>
+          <div class="post-excerpt">Die Geschichte hinter dem Kanal — kein Label, kein Budget, nur Musik.</div>
+          <div class="post-date">März 2025</div>
+        </div>
+      </a>
+      <a href="#" class="post-card reveal">
+        <div class="post-card-thumb">🌙</div>
+        <div class="post-card-body">
+          <div class="post-tag">Playlist Stories</div>
+          <div class="post-title">Die Nacht, die den Techno-Playlist-Mix inspiriert hat</div>
+          <div class="post-excerpt">Manchmal entsteht ein ganzer Vibe aus einer einzigen Nacht.</div>
+          <div class="post-date">Februar 2025</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="panda-hero.png" alt="Playlist Panda" />
+        <span class="footer-logo-text">PlaylistPanda</span>
+      </a>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Playlist Panda — All ears open.</span>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

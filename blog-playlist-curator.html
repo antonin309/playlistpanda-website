@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Become a Music Curator — Playlist Panda</title>
+  <meta name="description" content="Getting paid for listening to music? A practical guide to becoming a playlist curator on Spotify — for independent artists." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #faf7f2;
+      --bg2:      #f2ece0;
+      --bg3:      #e8e0d0;
+      --border:   rgba(26,21,16,0.12);
+      --border2:  rgba(26,21,16,0.22);
+      --text:     #1a1510;
+      --muted:    #7a6e5e;
+      --dim:      #c8bfb0;
+      --accent:   #e07060;
+      --teal:     #3bbfb8;
+      --offwhite: #fdfaf6;
+      --font-sans:'Instrument Sans', sans-serif;
+      --font-mono:'DM Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-sans); line-height: 1.6; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(250,247,242,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border2); }
+    .nav-logo-name { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+    .nav-logo-name .bp { color: var(--teal); }
+    .nav-logo-name .bd { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-back { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text); }
+    .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--dim); }
+    .lang-btn { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 11px; color: var(--muted); padding: 2px 4px; border-radius: 4px; transition: color 0.2s; }
+    .lang-btn.active { color: var(--text); font-weight: 600; }
+
+    /* HERO */
+    .article-hero {
+      padding: 130px 40px 56px;
+      max-width: 760px; margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-meta-top { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .article-cat {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); background: rgba(59,191,184,0.1); padding: 4px 10px; border-radius: 100px;
+    }
+    .article-date { font-family: var(--font-mono); font-size: 11px; color: var(--dim); }
+    .article-hero h1 {
+      font-size: clamp(28px, 4.5vw, 52px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 20px;
+    }
+    .article-hero-sub { font-size: 16px; color: var(--muted); line-height: 1.7; font-style: italic; }
+
+    /* BODY */
+    .article-body { max-width: 760px; margin: 0 auto; padding: 56px 40px 100px; }
+
+    .article-body p { font-size: 16px; line-height: 1.85; color: var(--text); margin-bottom: 24px; }
+
+    .article-body h2 {
+      font-size: clamp(20px, 2.8vw, 28px);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1.2;
+      margin: 52px 0 18px;
+      padding-top: 16px;
+      border-top: 2px solid var(--border2);
+    }
+
+    /* HOOK */
+    .hook {
+      margin: 36px 0;
+      padding: 24px 28px;
+      background: var(--bg2);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 12px 12px 0;
+      font-size: clamp(15px, 1.8vw, 18px);
+      font-weight: 600; letter-spacing: -0.02em; line-height: 1.35;
+      color: var(--text); font-style: italic;
+    }
+
+    /* LIST */
+    .article-list {
+      margin: 0 0 24px 0;
+      padding: 0;
+      list-style: none;
+    }
+    .article-list li {
+      font-size: 15px; line-height: 1.7; color: var(--text);
+      padding: 10px 0 10px 28px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-list li:last-child { border-bottom: none; }
+    .article-list li::before {
+      content: '✓';
+      position: absolute; left: 0;
+      color: var(--teal); font-weight: 700; font-size: 13px;
+    }
+
+    /* CTA BLOCK */
+    .article-cta {
+      margin-top: 52px;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 20px;
+      padding: 40px 36px;
+      text-align: center;
+    }
+    .article-cta-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 12px;
+    }
+    .article-cta h3 {
+      font-size: clamp(20px, 3vw, 32px); font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px;
+    }
+    .article-cta p {
+      font-size: 14px; color: rgba(250,247,242,0.6);
+      max-width: 400px; margin: 0 auto 28px; line-height: 1.7;
+    }
+    .article-cta ul {
+      list-style: none; margin: 0 0 28px; padding: 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      text-align: left; max-width: 520px; margin-left: auto; margin-right: auto;
+    }
+    .article-cta ul li {
+      font-size: 13px; color: rgba(250,247,242,0.75);
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .article-cta ul li::before { content: none; }
+    .article-cta ul li span.check { color: var(--teal); font-weight: 700; flex-shrink: 0; }
+    .btn-handbook {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #fff;
+      padding: 14px 32px; border-radius: 100px;
+      font-size: 15px; font-weight: 700; letter-spacing: -0.01em;
+      text-decoration: none; transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-handbook:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ARTICLE NAV */
+    .article-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 32px 0; border-top: 1px solid var(--border); margin-top: 48px;
+    }
+    .article-nav a { font-size: 13px; font-weight: 600; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .article-nav a:hover { color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      background: var(--text); color: var(--bg);
+      padding: 32px 40px; display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--bg); font-size: 15px; font-weight: 700; }
+    .footer-logo img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+    .footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(250,247,242,0.35); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .article-hero { padding: 110px 20px 40px; }
+      .article-body { padding: 40px 20px 80px; }
+      .article-cta ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="panda-hero.png" alt="Playlist Panda" />
+      <span class="nav-logo-name">Playlist<span class="bp">Panda<span class="bd">.</span></span></span>
+    </a>
+    <div class="nav-right">
+      <a href="index.html" class="nav-back" data-en="← Blog" data-de="← Blog">← Blog</a>
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <span>|</span>
+        <button class="lang-btn" data-lang="de">DE</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="article-hero">
+    <div class="article-meta-top">
+      <span class="article-cat" data-en="Guide" data-de="Guide">Guide</span>
+      <span class="article-date">May 2025</span>
+    </div>
+    <h1 data-en="Become a Music Curator (for Independent Artists)" data-de="Musik Curator werden (für Independent Artists)">Become a Music Curator (for Independent Artists)</h1>
+    <p class="article-hero-sub" data-en="Getting paid for listening to music — and growing your own streams at the same time. Here's how." data-de="Geld verdienen beim Musikhören — und gleichzeitig die eigenen Streams steigern. So geht's.">Getting paid for listening to music — and growing your own streams at the same time. Here's how.</p>
+  </div>
+
+  <!-- BODY -->
+  <div class="article-body">
+
+    <p data-en="Getting paid for listening to music? Reviewing a few songs in the morning with a freshly brewed coffee and getting paid for my favorite activity — sounds lovely!" data-de="Geld verdienen beim Musikhören? Morgens ein paar Songs mit einem frisch gebrühten Kaffee reviewen und für meine liebste Beschäftigung bezahlt werden – klingt verlockend!">Getting paid for listening to music? Reviewing a few songs in the morning with a freshly brewed coffee and getting paid for my favorite activity — sounds lovely!</p>
+
+    <p data-en="And yes, it actually works. Depending on your score and followers you can make anywhere from 50€ to 400€ per month just through reviews. You can reinvest the money in ads for your own music project or reinvest it to boost your playlists." data-de="Und ja, es funktioniert tatsächlich. Je nach Score und Followeranzahl kannst du zwischen 50€ und 400€ pro Monat allein durch Reviews verdienen. Das Geld kannst du in Werbung für dein eigenes Musikprojekt reinvestieren oder nutzen, um deine Playlists zu boosten.">And yes, it actually works. Depending on your score and followers you can make anywhere from 50€ to 400€ per month just through reviews. You can reinvest the money in ads for your own music project or reinvest it to boost your playlists.</p>
+
+    <div class="hook" data-en="But here's where it gets especially interesting for independent artists: most people use curation just to make some side income — but as an independent artist you can use it to grow your own streams at the same time." data-de="Aber hier wird es besonders interessant für Independent Artists: Die meisten nutzen Curation nur als Nebenverdienst – aber als Independent Artist kannst du es gleichzeitig nutzen, um deine eigenen Streams zu steigern.">But here's where it gets especially interesting for independent artists: most people use curation just to make some side income — but as an independent artist you can use it to grow your own streams at the same time.</div>
+
+    <p data-en="Create a playlist with matching songs for each of your own songs, promote it, write reviews and grow your streams and monthly listeners on the side. Two birds, one stone." data-de="Erstelle für jeden deiner Songs eine Playlist mit passenden Tracks, promote sie, schreibe Reviews und steigere nebenbei deine Streams und monatlichen Hörer. Zwei Fliegen, eine Klappe.">Create a playlist with matching songs for each of your own songs, promote it, write reviews and grow your streams and monthly listeners on the side. Two birds, one stone.</p>
+
+    <p data-en="It's not that simple though. Before you can write your first reviews, you need to invest some time and energy into promoting your playlists. But more on that later." data-de="So einfach ist es allerdings nicht. Bevor du dein erstes Review schreiben kannst, musst du Zeit und Energie in die Bewerbung deiner Playlists investieren. Aber dazu später mehr.">It's not that simple though. Before you can write your first reviews, you need to invest some time and energy into promoting your playlists. But more on that later.</p>
+
+    <h2 data-en="How Do I Become a Playlist Curator?" data-de="Wie werde ich Playlist Curator?">How Do I Become a Playlist Curator?</h2>
+
+    <p data-en="First, think about which genres you enjoy listening to and where you already have some expertise. Deep House for example. You can either sort playlists by subgenre (e.g. Stutter House) or by mood (sad, uplifting)." data-de="Überlege zunächst, welche Genres du gerne hörst und wo du bereits etwas Expertise hast. Deep House zum Beispiel. Du kannst Playlists entweder nach Subgenre sortieren (z.B. Stutter House) oder nach Stimmung (traurig, euphorisch).">First, think about which genres you enjoy listening to and where you already have some expertise. Deep House for example. You can either sort playlists by subgenre (e.g. Stutter House) or by mood (sad, uplifting).</p>
+
+    <p data-en='Now think about the "mood": where should the playlist be listened to? At sunset, after a breakup, or while walking the dog?' data-de='Jetzt überlege dir den „Mood": Wo soll die Playlist gehört werden? Beim Sonnenuntergang, nach einem Herzschmerz oder beim Gassigehen?'>Now think about the "mood": where should the playlist be listened to? At sunset, after a breakup, or while walking the dog?</p>
+
+    <p data-en="Now it's time to design the first cover. Search the internet for stock footage or look through your own photo library for cool pictures from your last vacation. Sometimes authentic vibes are trendier than polished stock photos. Add captions and then create one or two playlists on Spotify." data-de="Jetzt ist es Zeit, das erste Cover zu gestalten. Such im Internet nach Stockfotos oder schau in deiner eigenen Fotobibliothek nach coolen Bildern aus dem letzten Urlaub. Manchmal sind authentische Vibes trendiger als polierte Stockfotos. Füge Beschriftungen hinzu und erstelle dann ein oder zwei Playlists auf Spotify.">Now it's time to design the first cover. Search the internet for stock footage or look through your own photo library for cool pictures from your last vacation. Sometimes authentic vibes are trendier than polished stock photos. Add captions and then create one or two playlists on Spotify.</p>
+
+    <p data-en="You should also create promotional clips, meaning videos that you add captions to — we'll need those for the promo in a moment." data-de="Du solltest außerdem Promo-Clips erstellen – also Videos, die du mit Untertiteln versiehst. Die brauchen wir gleich für die Promo.">You should also create promotional clips, meaning videos that you add captions to — we'll need those for the promo in a moment.</p>
+
+    <h2 data-en="Building Listeners" data-de="Listener aufbauen">Building Listeners</h2>
+
+    <p data-en="Now we need listeners. Lots of listeners. The easiest way is Meta Ads. Create an Instagram and Facebook account, set up a Meta Ads account and test different ads. The link in the ad leads to your playlist." data-de="Jetzt brauchen wir Listener. Viele Listener. Der einfachste Weg sind Meta Ads. Erstelle einen Instagram- und Facebook-Account, richte einen Meta Ads-Account ein und teste verschiedene Anzeigen. Der Link in der Anzeige führt zu deiner Playlist.">Now we need listeners. Lots of listeners. The easiest way is Meta Ads. Create an Instagram and Facebook account, set up a Meta Ads account and test different ads. The link in the ad leads to your playlist.</p>
+
+    <p data-en="The problem is that ads can be a bit costly. It took me a few months until I had the money back through song reviews." data-de="Das Problem: Ads können etwas teuer sein. Bei mir hat es ein paar Monate gedauert, bis ich das Geld durch Song-Reviews wieder drin hatte.">The problem is that ads can be a bit costly. It took me a few months until I had the money back through song reviews.</p>
+
+    <div class="hook" data-en='So let's also do some free promotion: open a TikTok channel and post promo videos or pictures daily. Make people curious by writing: "You finally found the ultimate house playlist, listen now!"' data-de='Also machen wir auch etwas kostenlose Promo: Eröffne einen TikTok-Kanal und poste täglich Promo-Videos oder Bilder. Mach die Leute neugierig: „Du hast endlich die ultimative House-Playlist gefunden – jetzt reinhören!"'>So let's also do some free promotion: open a TikTok channel and post promo videos or pictures daily. Make people curious by writing: "You finally found the ultimate house playlist, listen now!"</div>
+
+    <h2 data-en="The First Review Websites" data-de="Die ersten Review-Websites">The First Review Websites</h2>
+
+    <p data-en="Once we have farmed 100 followers we can sign up on the first review website: Daily Playlists. We don't get paid here, but the people who apply will follow us. We want to reach 1,000 followers as quickly as possible, because then we can finally sign up on the review sites that pay us." data-de="Sobald wir 100 Follower gefarmt haben, können wir uns bei der ersten Review-Website anmelden: Daily Playlists. Wir werden hier zwar nicht bezahlt, aber die Leute, die sich bewerben, folgen uns. Wir wollen so schnell wie möglich 1.000 Follower erreichen, denn dann können wir uns endlich bei den Websites anmelden, die uns bezahlen.">Once we have farmed 100 followers we can sign up on the first review website: Daily Playlists. We don't get paid here, but the people who apply will follow us. We want to reach 1,000 followers as quickly as possible, because then we can finally sign up on the review sites that pay us.</p>
+
+    <p data-en="You can now put the earned money in your own pocket and have loads of organic chicken breast delivered (that's what I did at the beginning) — or reinvest the money into Meta Ads to get more listeners and therefore increase your score and your earnings on the curator sites." data-de="Das verdiente Geld kannst du dir in die eigene Tasche stecken und kiloweise Bio-Hühnerbrust liefern lassen (das habe ich am Anfang gemacht) – oder du reinvestierst das Geld in Meta Ads, um mehr Listener zu gewinnen und damit deinen Score und deine Einnahmen auf den Curator-Sites zu erhöhen.">You can now put the earned money in your own pocket and have loads of organic chicken breast delivered (that's what I did at the beginning) — or reinvest the money into Meta Ads to get more listeners and therefore increase your score and your earnings on the curator sites.</p>
+
+    <!-- CTA -->
+    <div class="article-cta">
+      <div class="article-cta-label" data-en="Want the full picture?" data-de="Das komplette Bild?">Want the full picture?</div>
+      <h3 data-en="This was just the overview." data-de="Das war nur die Zusammenfassung.">This was just the overview.</h3>
+      <p data-en="I've compiled everything I know about playlist promo and curation in one handbook:" data-de="Mein gesamtes Wissen rund um Playlist-Promo und Curation habe ich in einem Handbuch zusammengefasst:">I've compiled everything I know about playlist promo and curation in one handbook:</p>
+      <ul>
+        <li><span class="check">✓</span> <span data-en="The best curator websites compared" data-de="Die besten Curator-Websites im Vergleich">The best curator websites compared</span></li>
+        <li><span class="check">✓</span> <span data-en="Tips for writing good reviews fast" data-de="Tipps für gute Reviews in kurzer Zeit">Tips for writing good reviews fast</span></li>
+        <li><span class="check">✓</span> <span data-en="Meta Ads Manager — basics" data-de="Meta Ads Manager – Grundlagen">Meta Ads Manager — basics</span></li>
+        <li><span class="check">✓</span> <span data-en="AI prompts to find hooks in your niche" data-de="KI-Prompts für Hooks in deiner Nische">AI prompts to find hooks in your niche</span></li>
+        <li><span class="check">✓</span> <span data-en="30 stock videos with text & audio in 30 seconds" data-de="30 Stock-Videos mit Text & Audio in 30 Sekunden">30 stock videos with text & audio in 30 seconds</span></li>
+        <li><span class="check">✓</span> <span data-en="TikTok workflow — tons of content, fast" data-de="TikTok-Workflow – massenhaft Content, schnell">TikTok workflow — tons of content, fast</span></li>
+        <li><span class="check">✓</span> <span data-en="Workflow tips" data-de="Workflow-Tipps">Workflow tips</span></li>
+      </ul>
+      <a href="kurs.html" class="btn-handbook" data-en="👉 Get the handbook" data-de="👉 Zum Handbuch">👉 Get the handbook</a>
+    </div>
+
+    <div class="article-nav">
+      <a href="index.html" data-en="← Back to home" data-de="← Zurück zur Hauptseite">← Back to home</a>
+      <a href="musicology.html" data-en="More articles →" data-de="Mehr Artikel →">More articles →</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <a href="index.html" class="footer-logo">
+      <img src="panda-hero.png" alt="Playlist Panda" />
+      PlaylistPanda
+    </a>
+    <span class="footer-copy">© 2025 Playlist Panda — All ears open.</span>
+  </footer>
+
+  <script>
+    const langBtns = document.querySelectorAll('.lang-btn');
+    let currentLang = localStorage.getItem('pp-lang') || 'en';
+
+    function applyLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('pp-lang', lang);
+      document.documentElement.lang = lang;
+      langBtns.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+      document.querySelectorAll('[data-en]').forEach(el => {
+        const text = el.dataset[lang];
+        if (text) el.innerHTML = text;
+      });
+    }
+
+    langBtns.forEach(btn => btn.addEventListener('click', () => applyLang(btn.dataset.lang)));
+    if (currentLang === 'de') applyLang('de');
+  </script>
+</body>
+</html>

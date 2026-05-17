@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hip-Hop in der DDR — Musikwissenschaft · Playlist Panda</title>
+  <meta name="description" content="Three-M-Men und Electric Beat Crew: Rapmusik in der DDR zwischen naivem Idealismus und kreativer Selbstinszenierung." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #faf7f2;
+      --bg2:      #f2ece0;
+      --bg3:      #e8e0d0;
+      --border:   rgba(26,21,16,0.12);
+      --border2:  rgba(26,21,16,0.22);
+      --text:     #1a1510;
+      --muted:    #7a6e5e;
+      --dim:      #c8bfb0;
+      --accent:   #e07060;
+      --teal:     #3bbfb8;
+      --offwhite: #fdfaf6;
+      --font-sans:'Instrument Sans', sans-serif;
+      --font-mono:'DM Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-sans); line-height: 1.6; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(250,247,242,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border2); }
+    .nav-logo-name { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+    .nav-logo-name .bp { color: var(--teal); }
+    .nav-logo-name .bd { color: var(--accent); }
+    .nav-back { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text); }
+
+    /* ARTICLE HERO */
+    .article-hero {
+      padding: 130px 40px 56px;
+      max-width: 760px; margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-meta-top {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;
+    }
+    .article-cat {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); background: rgba(59,191,184,0.1);
+      padding: 4px 10px; border-radius: 100px;
+    }
+    .article-date { font-family: var(--font-mono); font-size: 11px; color: var(--dim); }
+    .article-lang-badge {
+      font-family: var(--font-mono); font-size: 10px;
+      color: var(--muted); border: 1px solid var(--border2);
+      padding: 3px 10px; border-radius: 100px;
+    }
+    .article-hero h1 {
+      font-size: clamp(28px, 4.5vw, 52px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.08;
+      margin-bottom: 20px;
+    }
+    .article-hero-sub {
+      font-size: 16px; color: var(--muted); line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ARTICLE BODY */
+    .article-body {
+      max-width: 760px; margin: 0 auto;
+      padding: 56px 40px 100px;
+    }
+
+    .article-body p {
+      font-size: 16px; line-height: 1.8;
+      color: var(--text); margin-bottom: 24px;
+    }
+
+    .article-body h2 {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1.15;
+      margin: 56px 0 20px;
+      padding-top: 16px;
+      border-top: 2px solid var(--border2);
+    }
+
+    /* CATCHY EINZEILER */
+    .hook {
+      margin: 40px 0;
+      padding: 28px 32px;
+      background: var(--bg2);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 12px 12px 0;
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: var(--text);
+      font-style: italic;
+    }
+    .hook .hook-mark {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--teal);
+      font-style: normal; font-weight: 500;
+      display: block; margin-bottom: 8px;
+    }
+
+    /* FOOTNOTES */
+    sup {
+      font-size: 11px; color: var(--teal);
+      font-family: var(--font-mono);
+      vertical-align: super;
+      margin-left: 1px;
+    }
+    sup a { color: var(--teal); text-decoration: none; }
+    sup a:hover { text-decoration: underline; }
+
+    .footnotes {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .footnotes-title {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 16px;
+    }
+    .footnote {
+      font-size: 12px; color: var(--muted); line-height: 1.6;
+      margin-bottom: 8px; display: flex; gap: 10px;
+    }
+    .footnote-num {
+      font-family: var(--font-mono); color: var(--teal);
+      font-size: 11px; flex-shrink: 0; min-width: 18px;
+    }
+    .footnote a { color: var(--teal); word-break: break-all; }
+
+    /* LITERATURVERZEICHNIS */
+    .literatur {
+      margin-top: 48px;
+      padding: 28px 32px;
+      background: var(--offwhite);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+    }
+    .literatur-title {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 16px;
+    }
+    .literatur p { font-size: 13px; color: var(--muted); margin-bottom: 8px; line-height: 1.6; }
+    .literatur a { color: var(--teal); word-break: break-all; }
+
+    /* NAV ARTICLE */
+    .article-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 32px 0; border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+    .article-nav a {
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .article-nav a:hover { color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      background: var(--text); color: var(--bg);
+      padding: 32px 40px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--bg); font-size: 15px; font-weight: 700; }
+    .footer-logo img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+    .footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(250,247,242,0.35); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .article-hero { padding: 110px 20px 40px; }
+      .article-body { padding: 40px 20px 80px; }
+      .hook { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="panda-hero.png" alt="Playlist Panda" />
+      <span class="nav-logo-name">Playlist<span class="bp">Panda<span class="bd">.</span></span></span>
+    </a>
+    <a href="musicology.html" class="nav-back">← Musikwissenschaft</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="article-hero">
+    <div class="article-meta-top">
+      <span class="article-cat">Musikwissenschaft</span>
+      <span class="article-lang-badge">DE</span>
+      <span class="article-date">Juli 2023</span>
+    </div>
+    <h1>„Wir wollen immer artig sein" —<br>Hip-Hop in der DDR</h1>
+    <p class="article-hero-sub">Three-M-Men &amp; Electric Beat Crew: Wie eine Jugend hinter dem Eisernen Vorhang den US-amerikanischen Hip-Hop zu ihrer eigenen Sprache machte.</p>
+  </div>
+
+  <!-- BODY -->
+  <div class="article-body">
+
+    <!-- EINLEITUNG -->
+    <p>„Rapmusik in der DDR war gekennzeichnet von mit naivem Idealismus gepaarter Unbeschwertheit und erreichte 1989 ihren Höhepunkt. Musikalisch wurde kreativ gearbeitet, was nicht nur die technischen Fertigungsweisen anbelangt, sondern auch die stilistische Vielfalt betrifft."<sup><a href="#fn1" id="ref1">1</a></sup></p>
+
+    <p>In meinem Essay werde ich die beiden Hip-Hop Crews „Three-M-Men" und die „Electric Beat Crew" vorstellen. Anhand Ihrer Biografien soll ein Eindruck des Lebensalltag der Hip-Hop Jugend der DDR dargestellt werden. Was macht die Szene in der DDR so Besonders und was unterscheidet sie von den Rap Crews aus dem Westen?</p>
+
+    <p>1985 kam der US-amerikanische Hip-Hop und Breakdance Film <em>Beat Street</em> in die Kinos der DDR. Die Regierung der DDR stufte den Film als Kritik am Kapitalismus ein und erlaubte somit die Ausstrahlung des US-Amerikanischen Films in den DDR-Kinos. Die afro-amerikanischen Jugendlichen, welche in prekären Wohnvierteln in New York City wohnen und von Armut betroffen sind, sollten eine abschreckende Wirkung auf die Menschen der DDR haben. Doch die Jugend war nicht abgeschreckt. Im Gegenteil: <em>Beatstreet</em> brachte den Hip-Hop und Breakdance Hype in die DDR.</p>
+
+    <p>Neben dem Rap gehörte auch das DJing, der Breakdance und die Graffiti Kunst zu den wichtigen Bestandteilen der Hip-Hop Szene, welche zusammen die sogenannten „vier Säulen des Hip-Hops" bilden.</p>
+
+    <div class="hook">
+      <span class="hook-mark">↓ Dresden, 1987</span>
+      Drei Jungs. Drei Namen mit M. Eine Szene, die sich gerade selbst erfand.
+    </div>
+
+    <!-- THREE-M-MEN -->
+    <h2>Three-M-Men</h2>
+
+    <p>Three-M-Men ist eine Dresdener Hip-Hop Gruppe bestehend aus Energy G, Mr. Michael MC und Selfmade Mike. Der Name Three-M-Men bezieht sich darauf, dass alle drei Vornamen der Musiker mit einem M beginnen. Der erste Three-M-Men-Gig fand im Oktober 1987 in Görlitz statt. Dies war schon ein Jahr bevor die fantastischen vier anfangen auf deutsch zu Rappen. Daher nennen sie sich selbstbewusst die „dienstälteste Rapband Deutschlands". Sie rappten auf deutsch und in simplem Schulenglisch, hatten diverse Auftritte in verschiedenen Locations. Sie veröffentlichten Mixtapes und waren in Jugendradio Sendungen.</p>
+
+    <div class="hook">
+      <span class="hook-mark">DIY war keine Ästhetik — es war die einzige Option.</span>
+      Kein Adidas im Laden? Dann näht man die Streifen eben selbst drauf.
+    </div>
+
+    <p>Die Three-M-Men sind ein gutes Beispiel für das DIY-Phänomen innerhalb der Hip-Hop Szene der DDR. Logos der Gruppe wurde mit Filzstiften auf Hoodies gemalt; Ihre Mütter schneiderten den angesagten Puma oder Adidas Hoodies nach. Markenkleidung und die Sneaker Kultur, welches beide wichtige Bestandteile der US-Amerikanischen Hip-Kultur sind wurden ebenfalls in der DDR-Szene etabliert. Adidas Anzüge werden beispielweise selbst nachgestellt, indem die charakteristischen Streifen eigens auf die Kleidung genäht wurden. Hier wird versucht die Ästhetik der Kleidung nach US-Amerikanischen Vorbild nachzuempfinden.</p>
+
+    <p>Im Jahr 1988 fand der erste deutsche Rap Contest in der Radebeuler „Tonhalle" in einem Vorort von Dresden statt. Zahlreiche Fans reisten aus der ganzen DDR und zelteten vor der Turnhalle in Radebeul. Beim ersten Rap-Contest nahmen 9 verschiedene Acts aus Städten wie Berlin, Dresden oder Leipzig teil. Hierbei kam es zur ersten großen Vernetzung und zum Kennenlernen der Hip-Hop Szene der Republik. Weitere Beispiele für die Vernetzung innerhalb der Szene ist zum Beispiel der von Electric B. und Peter Figas organisierte Hip-Hop Workshop in Nickern, bei welchem vor allem Jugendliche Workshops zum DJing, Rappen und Graffiti-sprühen bekommen haben. Hier ging es um den Austausch und das „connecten" innerhalb der Szene.<sup><a href="#fn2" id="ref2">2</a></sup></p>
+
+    <p>Ab 1988 spielen sie Auftritte teilweise unterstützt mit E-Gitarre, Keyboard und Schlagzeug und unterscheiden sich somit von den anderen Hip-Hop Acts. 1989 hatten sie Auftritte in folgenden Locations: Beim Rap-Contest in Radebeul, KH Karl Marx in Görlitz, bei „Ronnys Breaksystem" in Leipzig. Außerdem traten sie mit „Black J" auf, welche als erste Rapperin der DDR gilt (leider keine weiteren Informationen gefunden). Nach dem Wendefall pausieren die Three-M-Men aufgrund der von ihnen genannten „wendewirren".<sup><a href="#fn3" id="ref3">3</a></sup> Später finden sie wieder zusammen und sind unter anderem in der Metal-Rap Crossover Formation „Madrust" unterwegs. Ein Hörbeispiel ist die 1989 erschienene Three M-Men-EP „Oldschool-Trax" mit Songs wie „Talking Bout Da Scene (1989)."<sup><a href="#fn4" id="ref4">4</a></sup></p>
+
+    <div class="hook">
+      <span class="hook-mark">↓ Ostberlin, 1988</span>
+      Während Dresden rappte, baute Ostberlin an seinem eigenen Sound — im Kleiderschrank.
+    </div>
+
+    <!-- ELECTRIC BEAT CREW -->
+    <h2>Electric Beat Crew</h2>
+
+    <p>Die „Electric Beat Crew" war ein Hip-Hop Duo aus Ostberlin bestehend aus dem Rapper „Master K." und dem Producer „M.A.C." (steht für „Manipulator And Creator"), beide Jahrgang 1969. Sie veröffentlichten die erste und einzige Hip-Hop Platte mit englischen Texten in der DDR. Sie hatten Auftritte in der Jugendsendung Elf99, in der Musikvideosendung Formel 1 und in der ZDF-Hitparade (1990). Ihr Hitsong „Here We Come" gilt als Disco Klassiker des Jahres 1989 (besonders der Internationale Klang des Songs war sehr beliebt — DJs mussten damals mindestens 60% DDR-Lieder bei Veranstaltungen spielen).</p>
+
+    <p>Als musikalische Einflüsse nennen sie deutsche Gruppen wie Kraftwerk oder US Musiker wie Grandmaster Flash etc. Auch die „Electric Beat Crew" war maßgeblich von Filmen wie <em>Beatstreet</em> und <em>Wild Style</em> inspiriert. Der musikalische Stil von der Electric Beat Crew war jedoch im Vergleich zu anderen Acts deutlich mehr am Pop orientiert und enthielt zahlreiche Zitate anderer internationaler Musiker, z.B. dem juchzenden Michael-Jackson-Kreischer oder Bambaataas „Idadada-Yoyo."<sup><a href="#fn5" id="ref5">5</a></sup></p>
+
+    <div class="hook">
+      <span class="hook-mark">Kein Studio. Kein Budget. Kein Problem.</span>
+      Ein Tonbandgerät der Eltern, ein Kleiderschrank als Aufnahmekabine — und die Absicht, international zu klingen.
+    </div>
+
+    <p>Sie begannen anfangs auf Tonbandgeräten der Eltern Songs aufzunehmen: Es wurden Instrumentalpassagen von Songs aufgenommen und aneinandergeschnitten und dann darüber gerappt. Die Raps waren auf Englisch, allerdings ohne, dass sie die Aussprache und Grammatik richtig beachteten; vielmehr ging es um das künstlerische Klangbild, welches möglichst nah am US-Amerikanischen Vorbild sein sollte.</p>
+
+    <p>Ihr Ziel war es möglichst international zu klingen und das Lebensgefühl nach US-Vorbild auszudrücken. Die Texte enthielten keinerlei systemfeindliche Zeilen, die Art der Auflehnung könnte eher unterschwellig sein und zeigte sich durch die Abgrenzung zur typischen Musik in der DDR (gerade im Gegensatz zum deutschsprachigen DDR-Rockpop). Nachdem er den ganzen Sommer dafür gearbeitet hatte, kaufte Marco Birkner für 990 DM ein Keyboard aus Westberlin, welches er sich per Post zuschicken ließ.<sup><a href="#fn6" id="ref6">6</a></sup></p>
+
+    <p>Ihr erster Auftritt war im Frühling 1988 in einer Location in der Friedrichstr. in Berlin, bei welchem sie allerdings noch keine Spielerlaubnis besaßen. Bei dem Auftritt, bei welchem nur 13 Personen im Publikum anwesend waren, bestand die verwendete Technik aus Computersequenzer, einer Drehmaschine und einem Keyboard.<sup><a href="#fn7" id="ref7">7</a></sup></p>
+
+    <p>Nach einem Auftritt in der Jugendsendung Klik (1989) wurde das ostdeutsche Label Amiga auf sie aufmerksam. 1989 erschien beim Label die EP <em>Electric Beat Crew</em>, von welcher ca. 10.000 Stück gepresst wurden. Da es keinerlei Budget gab, wurden die Aufnahmen allerdings in einem Kleiderschrank aufgenommen.</p>
+
+    <p>Die „Electric Beat Crew" ist ebenfalls ein Beispiel für das Phänomen der DIY-Ästhetik der Rap Szene; insbesondere im Bereich der Musikproduktion. Von Anfang an begannen zahlreiche Artists in der ganzen Republik in ihren Kinderzimmern mit Equipment wie Recordern, Plattenspielern und Mikrophonen Songs zu spielen und aufzunehmen.</p>
+
+    <p>Nach dem Mauerfall hörte die Electric Beat Crew auf musikalisch aktiv zu sein. Rapper Master K bekam ein Kind und die Prioritäten der Rap Crew begannen sich zu verschieben. Auch benötigten sie nach dem Mauerfall nicht mehr die Musik als Ventil ihrer Emotionen, welche sie als Jugendliche in der DDR verspürten.</p>
+
+    <div class="hook">
+      <span class="hook-mark">9. November 1989</span>
+      Dann fiel die Mauer — und mit ihr eine Subkultur, die sich nur im Widerstand gegen sie definieren konnte.
+    </div>
+
+    <!-- ENDE DER KULTUR -->
+    <h2>Ende der Kultur</h2>
+
+    <p>Mit dem Mauerfall 1989 und der Wiedervereinigung Deutschlands am 3. Oktober 1990 endete die abgesonderte Hip-Hop-Jugendkultur in der DDR. Ab dem Zeitpunkt war es nicht mehr nötig sich von dem sozialistischen Regime abzugrenzen; nach der Vereinigung von Ost- und Westdeutschland lebten die Anhänger*innen in einem demokratischen und marktwirtschaftlich organisierten Staat. Die Identitätsfindung und Selbstinszenierung funktionierten ohne den Rahmen der DDR nicht mehr. Einige Hip-Hop Gruppen pausierten oder lösten sich auf. Auch das DIY-Phänomen gab es nun nicht mehr, welches ein wichtiger Bestandteil der Identität der DDR Hip-Hop Szene war. Der Grund dafür war, dass ab nun alles zu kaufen war, sodass die jungen Menschen sich die Klamotten nicht mehr selbst nähen und basteln mussten.</p>
+
+    <div class="hook">
+      <span class="hook-mark">Was bleibt.</span>
+      Eine Szene, die sich selbst erfunden hat — weil sie keine andere Wahl hatte. Und genau deshalb war sie einzigartig.
+    </div>
+
+    <p>Die Tatsache, dass es während der DDR-Zeit auf legalem Weg keine Möglichkeit gab, um den Idolen aus dem Film Beat Street nachzueifern, ließ in der DDR eine nicht vergleichbare Selbstinszenierung entstehen, bei der sich Jugendlichen vor allem auf ihre Kreativität und ihr Improvisationstalent berufen musste. Dies macht die Hip-Hop Szene meiner Meinung nach zu einer sehr interessanten und kreativen Subkultur. Textlich ging es um Themen wie Party machen, die Crew zu „representen" und gegen Neonazis zu sein.<sup><a href="#fn8" id="ref8">8</a></sup></p>
+
+    <p>Im Vergleich zu Westdeutschen Hip-Hop Artists, wie den Fantastischen Vier, welche nur auf deutsch rappten, orientieren sich die im Essay vorgestellten Acts aus der DDR noch mehr am US-Vorbild und rappen auf Englisch. Hierbei ging es wohl eher darum den Vorbildern aus Beatstreet etc. nachzueifern, als ein bewusstes politisches Statement zu setzen. Insgesamt lässt sich die Szene als nicht so sehr politisch betrachten wie beispielsweise die Punk Szene der DDR. Allerdings könnte es sich bei der Verwendung von englischen Raps und der Aneignung der Hip-Hop Kultur um eine unterschwellige Auflehnung gegen die DDR verstehen. Soundtechnisch ist die DDR-Szene sehr nah an den US-Vorbildern, doch bringt trotzdem seine eigenen Variationen mit. Innerhalb der Szene variiert das Soundbild allerdings sehr stark, denn es gibt Acts mit klassischem Hip-Hop Sound mit DJs und gesampelten Beats, auf der anderen Seite auch Acts die mehr Einflüsse aus der Popkultur haben wie die Electric Beat Crew und ebenfalls Hip-Hop Gruppen welche Liveinstrumente verwenden und sich in Richtung Rap-Rock bis Reggae-Rap Crossover entwickeln (wie die Three-M-Men).</p>
+
+    <!-- FOOTNOTES -->
+    <div class="footnotes">
+      <div class="footnotes-title">Fußnoten</div>
+      <div class="footnote" id="fn1"><span class="footnote-num">1</span><span>Wir wollen immer artig sein: Punk, New Wave, HipHop, Independent-Szene in der DDR 1980–1990 / hrsg. von Ronald Galenza, Berlin 1999. S. 325. <a href="#ref1">↩</a></span></div>
+      <div class="footnote" id="fn2"><span class="footnote-num">2</span><span>Galenza, S. 314–315. <a href="#ref2">↩</a></span></div>
+      <div class="footnote" id="fn3"><span class="footnote-num">3</span><span><a href="http://www.three-m-men.com/pages/band_fs.html" target="_blank">www.three-m-men.com/pages/band_fs.html</a> <a href="#ref3">↩</a></span></div>
+      <div class="footnote" id="fn4"><span class="footnote-num">4</span><span>Galenza, S. 321–322. <a href="#ref4">↩</a></span></div>
+      <div class="footnote" id="fn5"><span class="footnote-num">5</span><span>Galenza, S. 325. <a href="#ref5">↩</a></span></div>
+      <div class="footnote" id="fn6"><span class="footnote-num">6</span><span><a href="https://www.tagesspiegel.de/kultur/pop/ganz-junge-pioniere-hip-hop-in-der-ddr-1782283.html" target="_blank">tagesspiegel.de — Ganz junge Pioniere</a> <a href="#ref6">↩</a></span></div>
+      <div class="footnote" id="fn7"><span class="footnote-num">7</span><span><a href="http://www.electric-beat-crew.de/behind_02.html" target="_blank">electric-beat-crew.de/behind_02.html</a> <a href="#ref7">↩</a></span></div>
+      <div class="footnote" id="fn8"><span class="footnote-num">8</span><span>Galenza, S. 321. <a href="#ref8">↩</a></span></div>
+    </div>
+
+    <!-- LITERATURVERZEICHNIS -->
+    <div class="literatur">
+      <div class="literatur-title">Literaturverzeichnis</div>
+      <p>Galenza, Ronald, <em>Wir wollen immer artig sein: Punk, New Wave, HipHop, Independent-Szene in der DDR 1980–1990</em>, Berlin 1999, S. 314–325.</p>
+      <p><a href="https://www.tagesspiegel.de/kultur/pop/ganz-junge-pioniere-hip-hop-in-der-ddr-1782283.html" target="_blank">tagesspiegel.de — Ganz junge Pioniere: Hip-Hop in der DDR</a> (Zugriff 16.07.2023)</p>
+      <p><a href="http://www.three-m-men.com/pages/band_fs.html" target="_blank">www.three-m-men.com</a> (Zugriff 15.07.2023)</p>
+      <p><a href="http://www.electric-beat-crew.de" target="_blank">www.electric-beat-crew.de</a> (Zugriff 16.07.2023)</p>
+    </div>
+
+    <!-- ARTICLE NAV -->
+    <div class="article-nav">
+      <a href="musicology.html">← Alle Artikel</a>
+      <a href="index.html">Zurück zur Hauptseite →</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <a href="index.html" class="footer-logo">
+      <img src="panda-hero.png" alt="Playlist Panda" />
+      PlaylistPanda
+    </a>
+    <span class="footer-copy">© 2025 Playlist Panda — All ears open.</span>
+  </footer>
+
+</body>
+</html>

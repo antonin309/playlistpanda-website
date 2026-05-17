@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playlist Panda — Light Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #faf7f2;
+      --bg2:        #f2ece0;
+      --bg3:        #e8e0d0;
+      --border:     rgba(26,21,16,0.12);
+      --border2:    rgba(26,21,16,0.22);
+      --text:       #1a1510;
+      --muted:      #7a6e5e;
+      --dim:        #c8bfb0;
+      --accent:     #e07060;
+      --accent-dim: rgba(224,112,96,0.15);
+      --teal:       #3bbfb8;
+      --offwhite:   #fdfaf6;
+      --font-sans:  'Instrument Sans', sans-serif;
+      --font-mono:  'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* warm paper grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(250,247,242,0.9);
+      backdrop-filter: blur(16px);
+      border-color: var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .nav-logo img {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border2);
+    }
+    .nav-logo-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--text) !important;
+      color: var(--bg) !important;
+      padding: 8px 18px;
+      border-radius: 100px !important;
+      font-weight: 600 !important;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.8; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 60%, rgba(93,212,200,0.1) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 30% at 80% 20%, rgba(224,112,96,0.07) 0%, transparent 60%);
+    }
+
+    .hero-brand {
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.1s ease forwards;
+    }
+    .hero-brand-name {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+    }
+    .hero-brand-sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+
+    .hero-panda {
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.25s ease forwards;
+      position: relative;
+    }
+    .hero-panda img {
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border2);
+      box-shadow: 0 8px 40px rgba(26,21,16,0.12), 0 0 0 6px var(--bg2);
+    }
+    /* small decorative dots */
+    .hero-panda::before {
+      content: '✦';
+      position: absolute;
+      top: -10px; right: -14px;
+      font-size: 18px;
+      color: var(--accent);
+      opacity: 0.7;
+    }
+    .hero-panda::after {
+      content: '✦';
+      position: absolute;
+      bottom: 10px; left: -18px;
+      font-size: 12px;
+      color: var(--teal);
+      opacity: 0.6;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 72px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      color: var(--text);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.4s ease forwards;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 380px;
+      line-height: 1.7;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.55s ease forwards;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      align-items: stretch;
+      margin-bottom: 40px;
+      border: 2px solid var(--border2);
+      border-radius: 12px;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.7s ease forwards;
+    }
+    .stat {
+      padding: 14px 32px;
+      text-align: center;
+      background: var(--offwhite);
+    }
+    .stat + .stat { border-left: 2px solid var(--border2); }
+    .stat-num {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      display: block;
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .hero-cta {
+      opacity: 0;
+      animation: fadeUp 0.7s 0.85s ease forwards;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--text);
+      color: var(--bg);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.85; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 88px 40px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+    .section-line {
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+    }
+
+    /* ── PLAYLISTS ── */
+    #playlists { background: var(--bg); }
+
+    .playlist-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 340px));
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .playlist-card {
+      background: var(--offwhite);
+      border: 2px solid var(--border2);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .playlist-card:hover {
+      transform: translateY(-4px) rotate(-0.3deg);
+      box-shadow: 6px 8px 0 var(--border2);
+    }
+    .playlist-card iframe { display: block; border-radius: 14px 14px 0 0; }
+    .playlist-meta { padding: 14px 16px 16px; }
+    .playlist-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 3px 9px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── SUBMIT ── */
+    #submit { background: var(--bg2); }
+
+    /* ── PRODUCT ── */
+    #product {
+      background: var(--bg);
+      border-top: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+    }
+    .product-inner {
+      max-width: 940px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .product-img img {
+      width: 100%;
+      max-width: 400px;
+      filter: drop-shadow(4px 8px 24px rgba(26,21,16,0.18));
+    }
+    .product-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(224,112,96,0.3);
+      padding: 4px 12px;
+      border-radius: 4px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .product-title {
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+    .product-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .product-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .feature-dot {
+      width: 20px; height: 20px;
+      background: var(--accent-dim);
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: var(--accent);
+    }
+    .product-includes {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .include-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .btn-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 15px 32px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .btn-accent:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    /* ── SUPPORT ── */
+    #support {
+      background: var(--bg2);
+      text-align: center;
+      padding: 88px 40px;
+    }
+    .kofi-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid var(--border2);
+      margin-bottom: 24px;
+      box-shadow: 4px 4px 0 var(--border2);
+    }
+    .kofi-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    #support h2 {
+      font-size: clamp(26px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.1;
+    }
+    #support p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 380px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    .kofi-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 2px solid var(--border2);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .kofi-btn:hover {
+      background: var(--bg3);
+      border-color: var(--text);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      padding: 44px 40px 32px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 32px;
+      margin-bottom: 24px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .footer-logo img {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .footer-logo-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--bg);
+      letter-spacing: -0.02em;
+    }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a {
+      color: rgba(250,247,242,0.5);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--bg); }
+    .footer-social { display: flex; gap: 12px; }
+    .social-link {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(250,247,242,0.6);
+      text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .social-link:hover { color: var(--bg); border-color: rgba(255,255,255,0.4); }
+    .social-link svg { width: 15px; height: 15px; }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(250,247,242,0.35);
+    }
+    .footer-legal { display: flex; gap: 18px; list-style: none; }
+    .footer-legal a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(250,247,242,0.35);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: rgba(250,247,242,0.7); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      section { padding: 64px 24px; }
+      .hero { padding: 100px 24px 60px; }
+      .product-inner { grid-template-columns: 1fr; gap: 36px; }
+      .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+      .footer-bottom { flex-direction: column; gap: 12px; }
+    }
+    @media (max-width: 640px) {
+      .playlist-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: column; }
+      .stat + .stat { border-left: none; border-top: 2px solid var(--border2); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <img src="panda-hero.png" alt="Playlist Panda" />
+      <span class="nav-logo-name">PlaylistPanda</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#playlists">Playlists</a></li>
+      <li><a href="#submit">Submit</a></li>
+      <li><a href="#product">Course</a></li>
+      <li><a href="https://open.spotify.com/user/i1uh3o7rhbsyt27lqw50dznko" target="_blank" class="nav-cta">Follow on Spotify</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-brand">
+      <div class="hero-brand-name">PlaylistPanda</div>
+      <div class="hero-brand-sub">hand-curated since 2025</div>
+    </div>
+
+    <div class="hero-panda">
+      <img src="panda-hero.png" alt="Playlist Panda" />
+    </div>
+
+    <h1>Find Your<br><em>Sound.</em></h1>
+
+    <p class="hero-sub">Hand-curated Spotify playlists for every mood, moment, and hour of the night.</p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">9k+</span>
+        <span class="stat-label">Followers</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">1000+</span>
+        <span class="stat-label">Songs Curated</span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="https://open.spotify.com/user/i1uh3o7rhbsyt27lqw50dznko" target="_blank" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 11-.277-1.215c3.809-.87 7.077-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.13-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.518-.973c3.632-1.102 8.147-.568 11.234 1.329a.78.78 0 01.258 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 11-.543-1.794c3.527-1.07 9.393-.863 13.092 1.37a.937.937 0 01-.932 1.581z"/></svg>
+        Follow on Spotify
+      </a>
+    </div>
+  </section>
+
+  <!-- PLAYLISTS -->
+  <section id="playlists">
+    <div class="section-header reveal">
+      <span class="section-label">Monthly Top Picks</span>
+      <h2 class="section-title">The Playlists</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="playlist-grid">
+      <div class="playlist-card reveal">
+        <iframe src="https://open.spotify.com/embed/playlist/6ZsJ2ntIOXZ7uzAon9c6tT?utm_source=generator" width="100%" height="232" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div class="playlist-meta">
+          <div class="playlist-tags">
+            <span class="tag">night drive</span><span class="tag">techno-pop</span><span class="tag">melancholic</span><span class="tag">melodic techno</span>
+          </div>
+        </div>
+      </div>
+      <div class="playlist-card reveal">
+        <iframe src="https://open.spotify.com/embed/playlist/70KqmBdNCI3mdsoC8oyZ2H?utm_source=generator" width="100%" height="232" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div class="playlist-meta">
+          <div class="playlist-tags">
+            <span class="tag">deep house</span><span class="tag">progressive house</span><span class="tag">sunset vibes</span><span class="tag">moody</span>
+          </div>
+        </div>
+      </div>
+      <div class="playlist-card reveal">
+        <iframe src="https://open.spotify.com/embed/playlist/2UOBK0xnQglSgQmJ2Ca8Yk?utm_source=generator" width="100%" height="232" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div class="playlist-meta">
+          <div class="playlist-tags">
+            <span class="tag">deutschrap</span><span class="tag">german rap</span><span class="tag">underground</span><span class="tag">independent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBMIT -->
+  <section id="submit">
+    <div style="text-align:center;">
+      <span style="font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:0.14em;text-transform:uppercase;display:block;margin-bottom:12px;" class="reveal">Submit</span>
+      <h2 style="font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-0.03em;color:var(--text);margin-bottom:12px;" class="reveal">Send Music</h2>
+      <p style="font-size:14px;color:var(--muted);max-width:380px;margin:0 auto 28px;line-height:1.7;" class="reveal">Got a track that fits? Submit directly — no DMs, no email, just music.</p>
+      <div style="max-width:480px;margin:0 auto;" class="reveal">
+        <iframe src="https://www.submithub.com/widget.html?color=0a0a0a&background=5dd4c8&size=24px&text=Send your music &blog=playlistpanda&stats=true" frameborder="0" scrolling="no" width="100%" height="120px" style="border-radius:12px;"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT -->
+  <section id="product">
+    <div class="product-inner reveal">
+      <div class="product-img" style="display:flex;justify-content:center;">
+        <img src="kurs-mockup.png" alt="Playlist Curation Kurs" />
+      </div>
+      <div>
+        <div class="product-badge">Digitaler Kurs</div>
+        <h2 class="product-title">Playlist<br>Curation</h2>
+        <p class="product-desc">Learn how to curate, build and grow playlists — honest & practical.</p>
+        <div class="product-features">
+          <div class="feature-item"><span class="feature-dot">✓</span> Strategien & Grundlagen</div>
+          <div class="feature-item"><span class="feature-dot">✓</span> Musik & Trends verstehen</div>
+          <div class="feature-item"><span class="feature-dot">✓</span> Playlists aufbauen & optimieren</div>
+          <div class="feature-item"><span class="feature-dot">✓</span> Wachstum & Reichweite</div>
+        </div>
+        <div class="product-includes">
+          <span class="include-tag">Videomodule</span>
+          <span class="include-tag">Workbooks</span>
+          <span class="include-tag">Checklisten</span>
+          <span class="include-tag">Community</span>
+        </div>
+        <a href="https://ko-fi.com/s/ab9a1e8b16" target="_blank" class="btn-accent">Jetzt starten →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section id="support">
+    <img src="panda-player.png" alt="Playlist Panda" class="kofi-img reveal" />
+    <div class="kofi-label reveal">Keep the panda caffeinated</div>
+    <h2 class="reveal">Enjoy the music?<br>Buy the panda a coffee.</h2>
+    <p class="reveal">Playlist Panda is a passion project — no ads, no playlist placement, no BS. Just music worth sharing.</p>
+    <a href="https://ko-fi.com/playlistpanda" target="_blank" class="kofi-btn reveal">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
+      Support on Ko-fi
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <a href="#" class="footer-logo">
+        <img src="panda-hero.png" alt="Playlist Panda" />
+        <span class="footer-logo-text">PlaylistPanda</span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="#playlists">Playlists</a></li>
+        <li><a href="#submit">Submit</a></li>
+        <li><a href="#product">Course</a></li>
+        <li><a href="#support">Ko-fi</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="https://open.spotify.com/user/i1uh3o7rhbsyt27lqw50dznko" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 11-.277-1.215c3.809-.87 7.077-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.13-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.518-.973c3.632-1.102 8.147-.568 11.234 1.329a.78.78 0 01.258 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 11-.543-1.794c3.527-1.07 9.393-.863 13.092 1.37a.937.937 0 01-.932 1.581z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/playlistpanda/" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://ko-fi.com/playlistpanda" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Playlist Panda — All ears open.</span>
+      <ul class="footer-legal">
+        <li><a href="#">Impressum</a></li>
+        <li><a href="#">Datenschutz</a></li>
+        <li><a href="#">Kontakt</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
