@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Playlist Curation Kurs — Playlist Panda</title>
+  <title>Playlist Curator Guide — Playlist Panda</title>
+  <meta name="description" content="Everything you need to become a paid playlist curator on SubmitHub, Playlist Push, and Groover. 8-page PDF guide, instant download." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -85,14 +86,26 @@
       margin-bottom: 16px;
     }
     .kurs-hero h1 {
-      font-size: clamp(36px, 5vw, 64px);
-      font-weight: 700; letter-spacing: -0.04em; line-height: 1;
+      font-size: clamp(32px, 4.5vw, 58px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.05;
       margin-bottom: 20px;
     }
     .kurs-hero h1 span { color: var(--teal); }
     .kurs-hero-sub {
-      font-size: 16px; color: var(--muted);
-      line-height: 1.7; margin-bottom: 32px; max-width: 440px;
+      font-size: 15px; color: var(--muted);
+      line-height: 1.75; margin-bottom: 28px; max-width: 440px;
+    }
+    .kurs-claims {
+      display: flex; flex-direction: column; gap: 8px;
+      margin-bottom: 32px;
+    }
+    .kurs-claim {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 500; color: var(--text);
+    }
+    .kurs-claim-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal); flex-shrink: 0;
     }
     .kurs-hero-img { display: flex; justify-content: center; }
     .kurs-hero-img img {
@@ -100,45 +113,139 @@
       border-radius: 20px;
       box-shadow: 0 24px 64px rgba(26,21,16,0.14);
     }
+    .kurs-hero-img-placeholder {
+      width: 100%; max-width: 360px; min-height: 420px;
+      border-radius: 20px;
+      background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 80px;
+      box-shadow: 0 24px 64px rgba(26,21,16,0.1);
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #fff;
+      padding: 16px 36px; border-radius: 100px;
+      font-size: 16px; font-weight: 700; letter-spacing: -0.01em;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .kurs-price-note {
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--dim); margin-top: 12px;
+    }
 
-    /* FEATURES */
-    .kurs-features {
+    /* SPECS BAR */
+    .kurs-specs {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 40px 60px;
+    }
+    .specs-bar {
+      display: flex; gap: 0;
+      border: 2px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      background: var(--offwhite);
+    }
+    .spec-item {
+      flex: 1; padding: 20px 24px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .spec-item:last-child { border-right: none; }
+    .spec-num {
+      font-size: 22px; font-weight: 700; letter-spacing: -0.03em;
+      color: var(--text); display: block;
+    }
+    .spec-label {
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-top: 4px; display: block;
+    }
+
+    /* WHAT'S INSIDE */
+    .kurs-body {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 40px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .inside-box {
+      border: 2px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      background: var(--offwhite);
+    }
+    .inside-box h3 {
+      font-size: 16px; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 20px; color: var(--text);
+    }
+    .inside-list {
+      list-style: none; display: flex; flex-direction: column; gap: 12px;
+    }
+    .inside-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; line-height: 1.5; color: var(--text);
+    }
+    .inside-list li span.icon {
+      font-size: 16px; flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* CHAPTERS */
+    .chapters-box {
+      border: 2px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      background: var(--offwhite);
+    }
+    .chapters-box h3 {
+      font-size: 16px; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .chapter-list {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .chapter-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .chapter-row:last-child { border-bottom: none; }
+    .chapter-num {
+      font-family: var(--font-mono); font-size: 9px;
+      color: var(--teal); letter-spacing: 0.1em;
+      min-width: 24px;
+    }
+    .chapter-name { font-weight: 500; color: var(--text); }
+
+    /* FOR YOU IF */
+    .kurs-foryou {
       max-width: 1100px; margin: 0 auto;
       padding: 0 40px 80px;
     }
-    .kurs-features-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
-      margin-bottom: 48px;
-    }
-    .feature-card {
-      border: 2px solid var(--border);
-      border-radius: 16px; padding: 24px;
-      background: var(--offwhite);
-    }
-    .feature-icon { font-size: 28px; margin-bottom: 12px; }
-    .feature-title { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
-    .feature-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
-
-    /* WHAT'S INSIDE */
-    .kurs-includes {
+    .foryou-inner {
       border: 2px solid var(--border2);
       border-radius: 20px; background: var(--bg2);
-      padding: 32px; margin-bottom: 48px;
+      padding: 40px;
     }
-    .kurs-includes h3 {
-      font-size: 18px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 20px;
+    .foryou-inner h3 {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 20px;
     }
-    .include-list { display: flex; flex-wrap: wrap; gap: 10px; }
-    .include-chip {
-      padding: 8px 16px;
-      border: 1.5px solid var(--border2);
-      border-radius: 100px;
-      font-size: 13px; font-weight: 500;
-      background: var(--offwhite);
-      color: var(--text);
+    .foryou-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .foryou-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; line-height: 1.5; font-weight: 500;
+    }
+    .foryou-check {
+      color: var(--teal); font-size: 15px; flex-shrink: 0; margin-top: 1px;
     }
 
-    /* KOFI CTA */
+    /* CTA */
     .kurs-cta {
       text-align: center;
       padding: 64px 40px;
@@ -161,7 +268,7 @@
       font-size: 15px; color: rgba(250,247,242,0.6);
       max-width: 400px; margin: 0 auto 36px; line-height: 1.7;
     }
-    .btn-kofi {
+    .btn-cta {
       display: inline-flex; align-items: center; gap: 10px;
       background: var(--accent); color: #fff;
       padding: 16px 36px; border-radius: 100px;
@@ -169,10 +276,10 @@
       text-decoration: none;
       transition: opacity 0.2s, transform 0.2s;
     }
-    .btn-kofi:hover { opacity: 0.88; transform: translateY(-1px); }
-    .kurs-price {
+    .btn-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+    .kurs-cta-note {
       font-family: var(--font-mono); font-size: 11px;
-      color: rgba(250,247,242,0.4); margin-top: 16px;
+      color: rgba(250,247,242,0.35); margin-top: 16px;
     }
 
     /* FOOTER */
@@ -197,9 +304,14 @@
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
       .kurs-hero { grid-template-columns: 1fr; padding: 120px 20px 40px; gap: 32px; }
-      .kurs-hero-img { order: -1; }
-      .kurs-features { padding: 0 20px 60px; }
-      .kurs-features-grid { grid-template-columns: 1fr; }
+      .kurs-hero-img, .kurs-hero-img-placeholder { order: -1; max-width: 100%; min-height: 260px; }
+      .kurs-specs { padding: 0 20px 40px; }
+      .specs-bar { flex-direction: column; }
+      .spec-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .spec-item:last-child { border-bottom: none; }
+      .kurs-body { grid-template-columns: 1fr; padding: 0 20px 60px; }
+      .kurs-foryou { padding: 0 20px 60px; }
+      .foryou-grid { grid-template-columns: 1fr; }
       .kurs-cta { margin: 0 20px 60px; padding: 48px 24px; }
     }
   </style>
@@ -211,76 +323,152 @@
       <img src="panda-hero.png" alt="Playlist Panda" />
       <span class="nav-logo-name">Playlist<span class="bp">Panda<span class="bd">.</span></span></span>
     </a>
-    <a href="index.html" class="nav-back">← Zurück</a>
+    <a href="index.html" class="nav-back">← Back</a>
   </nav>
 
   <!-- HERO -->
   <div class="kurs-hero">
     <div>
-      <div class="kurs-hero-label reveal">✦ Digitaler Kurs · 4 Stunden</div>
-      <h1 class="reveal">Playlist <span>Curation</span><br>— Der Kurs.</h1>
-      <p class="kurs-hero-sub reveal">Alles was ich in Jahren als Playlist Curator gelernt habe — in einem ehrlichen, praktischen Kurs. Kein Bullshit, keine leeren Versprechen.</p>
+      <div class="kurs-hero-label reveal">✦ PDF Guide · Instant Download</div>
+      <h1 class="reveal">Playlist Curator Guide<br>for <span>Independent Artists.</span></h1>
+      <p class="kurs-hero-sub reveal">This guide walks you through everything you need to become a paid playlist curator on platforms like SubmitHub, Playlist Push, and Groover.</p>
+      <div class="kurs-claims reveal">
+        <div class="kurs-claim"><div class="kurs-claim-dot"></div>No experience needed</div>
+        <div class="kurs-claim"><div class="kurs-claim-dot"></div>No upfront investment</div>
+        <div class="kurs-claim"><div class="kurs-claim-dot"></div>Just a Spotify account and a love for music</div>
+      </div>
       <div class="reveal">
-        <a href="https://ko-fi.com/s/ab9a1e8b16" target="_blank" class="btn-kofi">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
-          Jetzt kaufen auf Ko-fi
+        <a href="https://ko-fi.com/s/ab9a1e8b16" target="_blank" class="btn-primary">
+          Get the Guide →
         </a>
-        <div class="kurs-price" style="margin-top:14px;">Einmaliger Kauf · Sofort Zugang · Digitaler Download</div>
+        <div class="kurs-price-note">One-time purchase · Instant download · 8 pages</div>
       </div>
     </div>
     <div class="kurs-hero-img reveal">
-      <img src="kurs-mockup.png" alt="Playlist Curation Kurs Mockup" />
+      <div class="kurs-hero-img-placeholder">📖</div>
     </div>
   </div>
 
-  <!-- FEATURES -->
-  <div class="kurs-features">
-    <div class="kurs-features-grid">
-      <div class="feature-card reveal">
-        <div class="feature-icon">🎧</div>
-        <div class="feature-title">Strategien & Grundlagen</div>
-        <div class="feature-desc">Was macht eine gute Playlist aus? Wie denkst du als Curator — und nicht als Algorithmus.</div>
+  <!-- SPECS BAR -->
+  <div class="kurs-specs reveal">
+    <div class="specs-bar">
+      <div class="spec-item">
+        <span class="spec-num">8</span>
+        <span class="spec-label">Pages</span>
       </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">📈</div>
-        <div class="feature-title">Wachstum & Reichweite</div>
-        <div class="feature-desc">Wie du Follower aufbaust, Playlists sichtbar machst und eine echte Community um deinen Sound schaffst.</div>
+      <div class="spec-item">
+        <span class="spec-num">PDF</span>
+        <span class="spec-label">Format</span>
       </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">🎵</div>
-        <div class="feature-title">Musik & Trends verstehen</div>
-        <div class="feature-desc">Wie man Trends liest, ohne ihnen hinterherzulaufen — und wie du deinen eigenen Stil entwickelst.</div>
+      <div class="spec-item">
+        <span class="spec-num">EN</span>
+        <span class="spec-label">Language</span>
       </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">🗂️</div>
-        <div class="feature-title">Playlists aufbauen & optimieren</div>
-        <div class="feature-desc">Track-Auswahl, Reihenfolge, Cover, Titel — der komplette Prozess von der Idee zur fertigen Playlist.</div>
+      <div class="spec-item">
+        <span class="spec-num">⚡</span>
+        <span class="spec-label">Instant Download</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT'S INSIDE + CHAPTERS -->
+  <div class="kurs-body">
+
+    <div class="inside-box reveal">
+      <h3>What's inside</h3>
+      <ul class="inside-list">
+        <li><span class="icon">🎵</span>Build a playlist from scratch the right way</li>
+        <li><span class="icon">🎯</span>Choose a niche that actually gets submissions</li>
+        <li><span class="icon">💰</span>Get listed on SubmitHub, Playlist Push &amp; Groover</li>
+        <li><span class="icon">✍️</span>Write reviews that get you accepted fast</li>
+        <li><span class="icon">📱</span>Grow on TikTok as a playlist curator</li>
+        <li><span class="icon">💡</span>Turn your taste into a real income stream</li>
+        <li><span class="icon">🗓️</span>The 90-day mindset plan to keep going</li>
+      </ul>
+    </div>
+
+    <div class="chapters-box reveal">
+      <h3>Table of Contents</h3>
+      <div class="chapter-list">
+        <div class="chapter-row">
+          <span class="chapter-num">01</span>
+          <span class="chapter-name">Why You Should Start</span>
+        </div>
+        <div class="chapter-row">
+          <span class="chapter-num">02</span>
+          <span class="chapter-name">Building Your Playlist</span>
+        </div>
+        <div class="chapter-row">
+          <span class="chapter-num">03</span>
+          <span class="chapter-name">Niche &amp; Concept</span>
+        </div>
+        <div class="chapter-row">
+          <span class="chapter-num">04</span>
+          <span class="chapter-name">Design &amp; Cover</span>
+        </div>
+        <div class="chapter-row">
+          <span class="chapter-num">05</span>
+          <span class="chapter-name">Growing on TikTok</span>
+        </div>
+        <div class="chapter-row">
+          <span class="chapter-num">06</span>
+          <span class="chapter-name">Curator Websites Compared</span>
+        </div>
+        <div class="chapter-row">
+          <span class="chapter-num">07</span>
+          <span class="chapter-name">Writing Great Reviews Fast</span>
+        </div>
+        <div class="chapter-row">
+          <span class="chapter-num">08</span>
+          <span class="chapter-name">Leveling Up on Platforms</span>
+        </div>
+        <div class="chapter-row">
+          <span class="chapter-num">09</span>
+          <span class="chapter-name">Mindset &amp; Your First 90 Days</span>
+        </div>
+        <div class="chapter-row">
+          <span class="chapter-num">✦</span>
+          <span class="chapter-name">Bonus</span>
+        </div>
       </div>
     </div>
 
-    <div class="kurs-includes reveal">
-      <h3>Was drin ist</h3>
-      <div class="include-list">
-        <span class="include-chip">🎬 Videomodule</span>
-        <span class="include-chip">📋 Workbooks</span>
-        <span class="include-chip">✅ Checklisten</span>
-        <span class="include-chip">⏱️ 4+ Stunden Content</span>
-        <span class="include-chip">🔄 Lebenslanger Zugang</span>
-        <span class="include-chip">📥 Sofort-Download</span>
+  </div>
+
+  <!-- THIS IS FOR YOU IF -->
+  <div class="kurs-foryou">
+    <div class="foryou-inner reveal">
+      <h3>This is for you if</h3>
+      <div class="foryou-grid">
+        <div class="foryou-item">
+          <span class="foryou-check">✓</span>
+          You want to earn money from music without making it
+        </div>
+        <div class="foryou-item">
+          <span class="foryou-check">✓</span>
+          You have a playlist but don't know what to do with it
+        </div>
+        <div class="foryou-item">
+          <span class="foryou-check">✓</span>
+          You've heard of SubmitHub but don't know where to start
+        </div>
+        <div class="foryou-item">
+          <span class="foryou-check">✓</span>
+          You want a side project that actually pays
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- KO-FI CTA -->
-    <div class="kurs-cta reveal">
-      <div class="kurs-cta-label">Bereit loszulegen?</div>
-      <h2>4 Hour Playlist<br>Curator</h2>
-      <p>How to become a music curator — der komplette Guide, direkt als digitaler Download.</p>
-      <a href="https://ko-fi.com/s/ab9a1e8b16" target="_blank" class="btn-kofi">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
-        Auf Ko-fi kaufen
-      </a>
-      <div class="kurs-price">Einmaliger Kauf · kein Abo · kein BS</div>
-    </div>
+  <!-- CTA -->
+  <div class="kurs-cta reveal">
+    <div class="kurs-cta-label">Ready to start?</div>
+    <h2>Get the Guide.</h2>
+    <p>8 pages. Everything you need to go from zero to paid curator — no fluff, no filler.</p>
+    <a href="https://ko-fi.com/s/ab9a1e8b16" target="_blank" class="btn-cta">
+      Get it on Ko-fi →
+    </a>
+    <div class="kurs-cta-note">One-time purchase · No subscription · Instant PDF download</div>
   </div>
 
   <footer>
@@ -303,6 +491,6 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(el => observer.observe(el));
   </script>
-<script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
