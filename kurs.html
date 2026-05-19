@@ -162,6 +162,28 @@
       color: var(--muted); margin-top: 4px; display: block;
     }
 
+    /* MOCKUP GALLERY */
+    .mockup-gallery {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 40px 60px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .mockup-gallery img {
+      width: 100%; border-radius: 20px;
+      box-shadow: 0 16px 48px rgba(26,21,16,0.12);
+      object-fit: cover;
+    }
+
+    /* POSTER SECTION */
+    .kurs-poster {
+      max-width: 700px; margin: 0 auto;
+      padding: 0 40px 60px;
+    }
+    .kurs-poster img {
+      width: 100%; border-radius: 20px;
+      box-shadow: 0 24px 64px rgba(26,21,16,0.14);
+    }
+
     /* WHAT'S INSIDE */
     .kurs-body {
       max-width: 1100px; margin: 0 auto;
@@ -309,6 +331,8 @@
       .specs-bar { flex-direction: column; }
       .spec-item { border-right: none; border-bottom: 1px solid var(--border); }
       .spec-item:last-child { border-bottom: none; }
+      .mockup-gallery { grid-template-columns: 1fr; padding: 0 20px 40px; }
+      .kurs-poster { padding: 0 20px 40px; }
       .kurs-body { grid-template-columns: 1fr; padding: 0 20px 60px; }
       .kurs-foryou { padding: 0 20px 60px; }
       .foryou-grid { grid-template-columns: 1fr; }
@@ -345,7 +369,7 @@
       </div>
     </div>
     <div class="kurs-hero-img reveal">
-      <img src="kurs-mockup.png" alt="Playlist Curator Guide for Independent Artists" />
+      <img src="mockup1.png" alt="Playlist Curator Guide for Independent Artists" />
     </div>
   </div>
 
@@ -369,6 +393,12 @@
         <span class="spec-label">Instant Download</span>
       </div>
     </div>
+  </div>
+
+  <!-- MOCKUP GALLERY -->
+  <div class="mockup-gallery">
+    <img src="mockup1.png" alt="Playlist Curator Guide Cover" class="reveal" />
+    <img src="1.png" alt="Playlist Curator Guide Table of Contents" class="reveal" />
   </div>
 
   <!-- WHAT'S INSIDE + CHAPTERS -->
@@ -458,6 +488,11 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- POSTER -->
+  <div class="kurs-poster">
+    <img src="2.png" alt="Turn your music taste into a small sidehustle — Playlist Curator Guide" class="reveal" />
   </div>
 
   <!-- CTA -->
