@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impressum — Playlist Panda</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #faf7f2; --text: #1a1510; --muted: #7a6e5e;
+      --border: rgba(26,21,16,0.12); --teal: #3bbfb8; --accent: #e07060;
+      --font-sans: 'Instrument Sans', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-sans); line-height: 1.7; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(250,247,242,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+    .nav-logo .bp { color: var(--teal); }
+    .nav-logo .bd { color: var(--accent); }
+    .nav-back { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; }
+    .nav-back:hover { color: var(--text); }
+    .content {
+      max-width: 600px; margin: 0 auto;
+      padding: 140px 40px 80px;
+    }
+    .label {
+      font-family: var(--font-mono); font-size: 10px;
+      color: var(--teal); letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 40px; }
+    h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 32px 0 8px; }
+    p { font-size: 14px; color: var(--text); }
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 768px) { nav { padding: 16px 20px; } .content { padding: 120px 20px 60px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="panda-hero.png" alt="Playlist Panda" />
+      Playlist<span class="bp">Panda<span class="bd">.</span></span>
+    </a>
+    <a href="index.html" class="nav-back">← Back</a>
+  </nav>
+
+  <div class="content">
+    <div class="label">Legal</div>
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p>Antonin Götz<br />Bahnstr. 4<br />12277 Berlin<br />Deutschland</p>
+
+    <h2>Kontakt</h2>
+    <p><a href="mailto:Playlistpanda@gmx.de">Playlistpanda@gmx.de</a></p>
+
+    <h2>Verantwortlich für den Inhalt</h2>
+    <p>Antonin Götz (Adresse wie oben)</p>
+
+    <h2>Haftungsausschluss</h2>
+    <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird keine Gewähr übernommen.</p>
+  </div>
+</body>
+</html>
