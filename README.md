@@ -1,6 +1,6 @@
 # Playlist Panda
 
-Marketing website for Playlist Panda — a hand-curated Spotify playlist brand teaching people how to become playlist curators.
+Website for my Spotify playlist curation brand. No framework, just clean HTML and CSS. Built to load fast and look good.
 
 ## Pages
 
