@@ -1,0 +1,29 @@
+# PlaylistPanda
+
+> PlaylistPanda is a hand-curated Spotify playlist channel run by Antonin Götz, based in Berlin. The channel focuses on independent music across genres like Deep House, Indie Folk, and German Rap.
+
+## About
+
+PlaylistPanda curates playlists on Spotify and accepts music submissions from independent artists via SubmitHub. The site also offers a PDF guide for artists and curators.
+
+## Pages
+
+- [Home](https://playlistpanda.net/): Main page with playlists, submission widget, and blog overview.
+- [Playlist Curator Guide](https://playlistpanda.net/kurs.html): An 8-page PDF guide teaching independent artists how to become paid playlist curators on SubmitHub, Playlist Push, and Groover.
+- [Blog: How to Become a Playlist Curator in 2026](https://playlistpanda.net/blog-playlist-curator.html): A practical guide covering the full process of building, growing, and monetizing a Spotify playlist as a curator.
+- [Musicology & Media Studies](https://playlistpanda.net/musicology.html): Academic and semi-academic articles on music, sound, and media.
+- [Hip-Hop in der DDR](https://playlistpanda.net/musicology-ddr-hiphop.html): Essay on how East German youth adopted US hip-hop culture behind the Iron Curtain (in German).
+
+## Product
+
+**Playlist Curator Guide for Independent Artists**
+- Format: PDF, 8 pages, English
+- Price: available on Ko-fi
+- Topics: Building a playlist, choosing a niche, SubmitHub/Playlist Push/Groover, writing reviews, growing on TikTok, 90-day mindset plan
+- URL: https://playlistpanda.net/kurs.html
+
+## Contact
+
+- Email: Playlistpanda@gmx.de
+- Spotify: https://open.spotify.com/user/i1uh3o7rhbsyt27lqw50dznko
+- Instagram: https://www.instagram.com/playlistpanda/
