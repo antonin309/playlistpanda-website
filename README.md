@@ -1,6 +1,8 @@
 # Playlist Panda
 
-Website for a Spotify playlist curation brand. No framework, just clean HTML and CSS.
+I curate Spotify playlists and wanted a proper website for the brand. No framework, just HTML and CSS from scratch. Wanted it fast, clean, and fully mine.
+
+**Learned:** CSS custom properties, responsive layout without a framework, copywriting
 
 ## Pages
 
